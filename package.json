@@ -1,9 +1,9 @@
 {
-  "name": "ts-template",
+  "name": "time-engine-like",
   "version": "0.0.1",
   "description": "",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "./build/time-engine-like.js",
+  "types": "./build/time-engine-like.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b ./src/tsconfig.json",
