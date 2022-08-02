@@ -9,5 +9,8 @@
     "build": "tsc -b ./src/tsconfig.json",
     "clean": "rm -rf ./build"
   },
-  "author": "Zim"
+  "author": "Zim",
+  "dependencies": {
+    "@zimtsui/manual-promise": "^0.0.2"
+  }
 }
