@@ -16,25 +16,37 @@ export interface TimeoutLike {
 	clear(): void;
 }
 
-export class Cancellable extends ManualPromise<void> {
+export class Cancellable implements PromiseLike<void> {
 	private timeout: TimeoutLike;
+	private manual = new ManualPromise<void>();
+
 	public constructor(
 		ms: number,
 		engine: TimeEngineLike,
 	) {
-		super();
 		this.timeout = engine.setTimeout(
-			this.resolve,
+			this.manual.resolve,
 			ms,
 		);
 	}
 
-	public cancel(
-		err: Error = new Cancelled(),
-	): void {
+	public cancel(err: Error): void {
 		this.timeout.clear();
-		this.reject(err);
+		this.manual.reject(err);
+	}
+
+	public then<TResult1 = void, TResult2 = never>(onFulfilled: ((value: void) => TResult1 | PromiseLike<TResult1>) | null | undefined, onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): PromiseLike<TResult1 | TResult2> {
+		return this.manual.then(onFulfilled, onRejected);
+	}
+
+	public catch<TResult2>(
+		onRejected: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined,
+	): PromiseLike<void | TResult2> {
+		return this.manual.then(x => x, onRejected);
+	}
+
+	public finally(onFinally: () => void): PromiseLike<void> {
+		return this.then(onFinally, onFinally)
+			.then(() => this);
 	}
 }
-
-export class Cancelled extends Error { }

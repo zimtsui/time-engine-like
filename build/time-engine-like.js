@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cancelled = exports.Cancellable = exports.TimeEngineLike = void 0;
+exports.Cancellable = exports.TimeEngineLike = void 0;
 const manual_promise_1 = require("@zimtsui/manual-promise");
 class TimeEngineLike {
     sleep(ms) {
@@ -8,18 +8,25 @@ class TimeEngineLike {
     }
 }
 exports.TimeEngineLike = TimeEngineLike;
-class Cancellable extends manual_promise_1.ManualPromise {
+class Cancellable {
     constructor(ms, engine) {
-        super();
-        this.timeout = engine.setTimeout(this.resolve, ms);
+        this.manual = new manual_promise_1.ManualPromise();
+        this.timeout = engine.setTimeout(this.manual.resolve, ms);
     }
-    cancel(err = new Cancelled()) {
+    cancel(err) {
         this.timeout.clear();
-        this.reject(err);
+        this.manual.reject(err);
+    }
+    then(onFulfilled, onRejected) {
+        return this.manual.then(onFulfilled, onRejected);
+    }
+    catch(onRejected) {
+        return this.manual.then(x => x, onRejected);
+    }
+    finally(onFinally) {
+        return this.then(onFinally, onFinally)
+            .then(() => this);
     }
 }
 exports.Cancellable = Cancellable;
-class Cancelled extends Error {
-}
-exports.Cancelled = Cancelled;
 //# sourceMappingURL=time-engine-like.js.map

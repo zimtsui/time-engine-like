@@ -7,10 +7,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b ./src/tsconfig.json",
-    "clean": "rm -rf ./build"
+    "clean": "rm -rf ./build",
+    "rebuild": "npm run clean && npm run build"
   },
   "author": "Zim",
   "dependencies": {
-    "@zimtsui/manual-promise": "^0.0.2"
+    "@zimtsui/manual-promise": "^0.0.5"
   }
 }
