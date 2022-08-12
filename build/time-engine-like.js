@@ -21,11 +21,10 @@ class Cancellable {
         return this.manual.then(onFulfilled, onRejected);
     }
     catch(onRejected) {
-        return this.manual.then(x => x, onRejected);
+        return this.manual.catch(onRejected);
     }
     finally(onFinally) {
-        return this.then(onFinally, onFinally)
-            .then(() => this);
+        return this.manual.finally(onFinally);
     }
 }
 exports.Cancellable = Cancellable;

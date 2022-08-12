@@ -12,6 +12,6 @@
   },
   "author": "Zim",
   "dependencies": {
-    "@zimtsui/manual-promise": "^0.0.5"
+    "@zimtsui/manual-promise": "^0.0.6"
   }
 }

@@ -35,18 +35,20 @@ export class Cancellable implements PromiseLike<void> {
 		this.manual.reject(err);
 	}
 
-	public then<TResult1 = void, TResult2 = never>(onFulfilled: ((value: void) => TResult1 | PromiseLike<TResult1>) | null | undefined, onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): PromiseLike<TResult1 | TResult2> {
+	public then<TResult1 = void, TResult2 = never>(
+		onFulfilled: ((value: void) => TResult1 | PromiseLike<TResult1>) | null | undefined,
+		onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined,
+	): Promise<TResult1 | TResult2> {
 		return this.manual.then(onFulfilled, onRejected);
 	}
 
 	public catch<TResult2>(
 		onRejected: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined,
-	): PromiseLike<void | TResult2> {
-		return this.manual.then(x => x, onRejected);
+	): Promise<void | TResult2> {
+		return this.manual.catch(onRejected);
 	}
 
-	public finally(onFinally: () => void): PromiseLike<void> {
-		return this.then(onFinally, onFinally)
-			.then(() => this);
+	public finally(onFinally: () => void): Promise<void> {
+		return this.manual.finally(onFinally);
 	}
 }
