@@ -2,18 +2,20 @@ export declare abstract class TimeEngineLike {
     abstract setTimeout: (cb: () => void, ms: number) => TimeoutLike;
     abstract now: () => number;
     /**
+     * @sealed
      * @decorator boundMethod
      */
     sleep(ms: number): Cancellable;
 }
 export interface TimeoutLike {
-    clear(): void;
+    clear: () => void;
 }
 export declare class Cancellable implements PromiseLike<void> {
     private timeout;
     private manual;
     constructor(ms: number, engine: TimeEngineLike);
     /**
+     * @sealed
      * @decorator boundMethod
      */
     cancel(err: Error): void;

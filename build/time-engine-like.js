@@ -11,6 +11,7 @@ const manual_promise_1 = require("@zimtsui/manual-promise");
 const autobind_decorator_1 = require("autobind-decorator");
 class TimeEngineLike {
     /**
+     * @sealed
      * @decorator boundMethod
      */
     sleep(ms) {
@@ -27,6 +28,7 @@ class Cancellable {
         this.timeout = engine.setTimeout(this.manual.resolve, ms);
     }
     /**
+     * @sealed
      * @decorator boundMethod
      */
     cancel(err) {

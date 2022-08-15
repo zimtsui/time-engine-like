@@ -10,6 +10,7 @@ export abstract class TimeEngineLike {
 	public abstract now: () => number;
 
 	/**
+	 * @sealed
 	 * @decorator boundMethod
 	 */
 	@boundMethod
@@ -19,7 +20,7 @@ export abstract class TimeEngineLike {
 }
 
 export interface TimeoutLike {
-	clear(): void;
+	clear: () => void;
 }
 
 export class Cancellable implements PromiseLike<void> {
@@ -37,6 +38,7 @@ export class Cancellable implements PromiseLike<void> {
 	}
 
 	/**
+	 * @sealed
 	 * @decorator boundMethod
 	 */
 	@boundMethod
