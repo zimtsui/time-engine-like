@@ -3,7 +3,7 @@ export declare abstract class TimeEngineLike {
     abstract now: () => number;
     /**
      * @sealed
-     * @decorator boundMethod
+     * @decorator `@boundMethod`
      */
     sleep(ms: number): Cancellable;
 }
@@ -16,7 +16,7 @@ export declare class Cancellable implements PromiseLike<void> {
     constructor(ms: number, engine: TimeEngineLike);
     /**
      * @sealed
-     * @decorator boundMethod
+     * @decorator `@boundMethod`
      */
     cancel(err: Error): void;
     then<TResult1 = void, TResult2 = never>(onFulfilled: ((value: void) => TResult1 | PromiseLike<TResult1>) | null | undefined, onRejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined): Promise<TResult1 | TResult2>;

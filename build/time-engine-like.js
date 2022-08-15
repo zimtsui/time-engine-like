@@ -12,7 +12,7 @@ const autobind_decorator_1 = require("autobind-decorator");
 class TimeEngineLike {
     /**
      * @sealed
-     * @decorator boundMethod
+     * @decorator `@boundMethod`
      */
     sleep(ms) {
         return new Cancellable(ms, this);
@@ -29,7 +29,7 @@ class Cancellable {
     }
     /**
      * @sealed
-     * @decorator boundMethod
+     * @decorator `@boundMethod`
      */
     cancel(err) {
         this.timeout.clear();

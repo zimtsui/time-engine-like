@@ -11,7 +11,7 @@ export abstract class TimeEngineLike {
 
 	/**
 	 * @sealed
-	 * @decorator boundMethod
+	 * @decorator `@boundMethod`
 	 */
 	@boundMethod
 	public sleep(ms: number): Cancellable {
@@ -39,7 +39,7 @@ export class Cancellable implements PromiseLike<void> {
 
 	/**
 	 * @sealed
-	 * @decorator boundMethod
+	 * @decorator `@boundMethod`
 	 */
 	@boundMethod
 	public cancel(err: Error): void {
