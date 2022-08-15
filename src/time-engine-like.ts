@@ -1,4 +1,5 @@
 import { ManualPromise } from '@zimtsui/manual-promise';
+import { boundMethod } from 'autobind-decorator';
 
 
 export abstract class TimeEngineLike {
@@ -7,7 +8,12 @@ export abstract class TimeEngineLike {
 		ms: number,
 	) => TimeoutLike;
 	public abstract now: () => number;
-	public sleep = (ms: number): Cancellable => {
+
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
+	public sleep(ms: number): Cancellable {
 		return new Cancellable(ms, this);
 	}
 }
@@ -30,6 +36,10 @@ export class Cancellable implements PromiseLike<void> {
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public cancel(err: Error): void {
 		this.timeout.clear();
 		this.manual.reject(err);

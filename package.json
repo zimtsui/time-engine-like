@@ -12,6 +12,7 @@
   },
   "author": "Zim",
   "dependencies": {
-    "@zimtsui/manual-promise": "^0.0.6"
+    "@zimtsui/manual-promise": "^0.0.6",
+    "autobind-decorator": "^2.4.0"
   }
 }
