@@ -1,7 +1,7 @@
 export declare abstract class TimeEngineLike {
-    abstract setTimeout(cb: () => void, ms: number): TimeoutLike;
-    abstract now(): number;
-    sleep(ms: number): Cancellable;
+    abstract setTimeout: (cb: () => void, ms: number) => TimeoutLike;
+    abstract now: () => number;
+    sleep: (ms: number) => Cancellable;
 }
 export interface TimeoutLike {
     clear(): void;

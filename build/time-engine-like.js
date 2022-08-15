@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Cancellable = exports.TimeEngineLike = void 0;
 const manual_promise_1 = require("@zimtsui/manual-promise");
 class TimeEngineLike {
-    sleep(ms) {
-        return new Cancellable(ms, this);
+    constructor() {
+        this.sleep = (ms) => {
+            return new Cancellable(ms, this);
+        };
     }
 }
 exports.TimeEngineLike = TimeEngineLike;

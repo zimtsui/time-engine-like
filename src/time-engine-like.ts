@@ -2,12 +2,12 @@ import { ManualPromise } from '@zimtsui/manual-promise';
 
 
 export abstract class TimeEngineLike {
-	public abstract setTimeout(
+	public abstract setTimeout: (
 		cb: () => void,
 		ms: number,
-	): TimeoutLike;
-	public abstract now(): number;
-	public sleep(ms: number): Cancellable {
+	) => TimeoutLike;
+	public abstract now: () => number;
+	public sleep = (ms: number): Cancellable => {
 		return new Cancellable(ms, this);
 	}
 }
