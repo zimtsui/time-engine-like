@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Cancellable = exports.TimeEngineLike = void 0;
+exports.TimeEngineLike = void 0;
 const coroutine_locks_1 = require("@zimtsui/coroutine-locks");
 const autobind_decorator_1 = require("autobind-decorator");
 class TimeEngineLike {
@@ -22,31 +22,34 @@ __decorate([
     autobind_decorator_1.boundMethod
 ], TimeEngineLike.prototype, "sleep", null);
 exports.TimeEngineLike = TimeEngineLike;
-class Cancellable {
-    constructor(ms, engine) {
-        this.manual = new coroutine_locks_1.ManualPromise();
-        this.timeout = engine.setTimeout(this.manual.resolve, ms);
+(function (TimeEngineLike) {
+    class Cancellable {
+        constructor(ms, engine) {
+            this.manual = new coroutine_locks_1.ManualPromise();
+            this.timeout = engine.setTimeout(this.manual.resolve, ms);
+        }
+        /**
+         * @sealed
+         * @decorator `@boundMethod`
+         */
+        cancel(err) {
+            this.timeout.clear();
+            this.manual.reject(err);
+        }
+        then(onFulfilled, onRejected) {
+            return this.manual.then(onFulfilled, onRejected);
+        }
+        catch(onRejected) {
+            return this.manual.catch(onRejected);
+        }
+        finally(onFinally) {
+            return this.manual.finally(onFinally);
+        }
     }
-    /**
-     * @sealed
-     * @decorator `@boundMethod`
-     */
-    cancel(err) {
-        this.timeout.clear();
-        this.manual.reject(err);
-    }
-    then(onFulfilled, onRejected) {
-        return this.manual.then(onFulfilled, onRejected);
-    }
-    catch(onRejected) {
-        return this.manual.catch(onRejected);
-    }
-    finally(onFinally) {
-        return this.manual.finally(onFinally);
-    }
-}
-__decorate([
-    autobind_decorator_1.boundMethod
-], Cancellable.prototype, "cancel", null);
-exports.Cancellable = Cancellable;
+    __decorate([
+        autobind_decorator_1.boundMethod
+    ], Cancellable.prototype, "cancel", null);
+    TimeEngineLike.Cancellable = Cancellable;
+})(TimeEngineLike = exports.TimeEngineLike || (exports.TimeEngineLike = {}));
+var Cancellable = TimeEngineLike.Cancellable;
 //# sourceMappingURL=time-engine-like.js.map
