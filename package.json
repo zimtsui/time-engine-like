@@ -1,6 +1,6 @@
 {
   "name": "@zimtsui/time-engine-like",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "./build/time-engine-like.js",
   "types": "./build/time-engine-like.d.ts",
