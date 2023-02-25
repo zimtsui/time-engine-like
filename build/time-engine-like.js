@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Cancellable = exports.TimeEngineLike = void 0;
-const manual_promise_1 = require("@zimtsui/manual-promise");
+const coroutine_locks_1 = require("@zimtsui/coroutine-locks");
 const autobind_decorator_1 = require("autobind-decorator");
 class TimeEngineLike {
     /**
@@ -24,7 +24,7 @@ __decorate([
 exports.TimeEngineLike = TimeEngineLike;
 class Cancellable {
     constructor(ms, engine) {
-        this.manual = new manual_promise_1.ManualPromise();
+        this.manual = new coroutine_locks_1.ManualPromise();
         this.timeout = engine.setTimeout(this.manual.resolve, ms);
     }
     /**

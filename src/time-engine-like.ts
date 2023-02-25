@@ -1,4 +1,4 @@
-import { ManualPromise } from '@zimtsui/manual-promise';
+import { ManualPromise } from '@zimtsui/coroutine-locks';
 import { boundMethod } from 'autobind-decorator';
 
 
