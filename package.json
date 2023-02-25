@@ -12,7 +12,7 @@
   },
   "author": "Zim",
   "dependencies": {
-    "@zimtsui/coroutine-locks": "^0.0.13",
+    "@zimtsui/coroutine-locks": "^0.0.15",
     "autobind-decorator": "^2.4.0"
   },
   "license": "MIT"
